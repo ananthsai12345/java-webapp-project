@@ -1,34 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: loksai-eta-deploy
+  name: java-myapp-deploy  
   labels:
-    app: loksai-eta-deploy-lbl
+    app: java-myapp
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: loksai-eta-app
+      app: java-myapp
   template:
     metadata:
       labels:
-        app: loksai-eta-app
+        app: java-myapp
     spec:
       containers:
-      - name: loksai-eta-container
-        image: loksaieta/pl-kdeploy_demo_app
+      - name: webapp-java
+        image: ananthsai12/java-myapp
         ports:
         - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: loksai-eta-np-service
+  name: java-webapp-service
   labels:
-    app: loksai-eta-app
+    app: java-webapp
 spec:
   selector:
-    app: loksai-eta-deploy-lbl
+    app: java-myapp
 
   type: NodePort
   ports:
